@@ -4,7 +4,7 @@ Example ROS package showcasing ROS-Kafka integration in a simple scenario involv
 
 ## Requirements
 
-The package has been developed using ROS Melodic on Ubuntu 18.04. It depends on *MoveIt!* for motion planning capabilities and on [Kafka Python binding](https://github.com/confluentinc/confluent-kafka-python) for communication. Specifically, the package provides motion planning features for Panda and UR5, therefore the corresponding *moveit_config* packages need to be installed. In particular:
+The package has been developed using ROS Melodic on Ubuntu 18.04. It depends on *MoveIt!* for motion planning capabilities and on the [Kafka Python bindings](https://github.com/confluentinc/confluent-kafka-python) for communication. Specifically, the package provides motion planning features for Panda and UR5, therefore the corresponding *moveit_config* packages need to be installed. In particular:
 
 1. for Panda, please visit the [repo](https://github.com/ros-planning/panda_moveit_config), select the corresponding ROS distrubution branch and download the package in your workspace. Compile and install normally via *catkin_make*;
 2. for UR5 binaries for the *moveit_config* package are available and can be installed via `sudo apt-get install ros-<DISTRO>-ur5-moveit-config`.
