@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>     
+
+  <group ns="panda">
+  <include file="$(find panda_moveit_config)/launch/demo.launch">
+    <arg name="use_rviz" value="false" /> 
+  </include>
+</group>
+<group ns="ur5">
+  <include file="$(find ur5_moveit_config)/launch/demo.launch">
+    <arg name="use_rviz" value="false" /> 
+  </include>
+</group>
+  
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_to_base_link_node" args="0 0 0 0 0 0  world base_link" />
+
+<node pkg="robot_soccer_demo" type="kafka_consumer_node.py" name="kafka_consumer_node" output="screen" />
+
+</launch>
