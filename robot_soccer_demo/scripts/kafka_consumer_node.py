@@ -8,7 +8,7 @@ from geometry_msgs.msg import Point
 from confluent_kafka import Consumer
 
 # API key values for connecting to local Kafka server
-KAFKA_BOOTSTRAP_SERVER = '192.168.137.1:9093,192.168.137.1:9094,192.168.137.1:9095'
+KAFKA_BOOTSTRAP_SERVER = '192.168.126.219:9096,192.168.126.219:9097,192.168.126.219:9098'
 KAFKA_API_KEY = 'theengineroom'
 KAFKA_API_SECRET = "1tY=ZP43t20"
 
@@ -52,6 +52,7 @@ class KafkaConsumerNode:
             while True:
                 # Poll Kafka server with 1 sec timeout
                 msg = self.consumer.poll(1.0)
+                
                 # Proceed to next iteration if timeout expired...
                 if msg is None:
                     continue
@@ -60,12 +61,14 @@ class KafkaConsumerNode:
                     continue
                 # If read message, decode value()
                 point_msg_str = msg.value().split()
+
+                
                 # Parse message based on robot type
                 p = Point()
                 p.x = -0.01 * float(point_msg_str[4][:-1])
                 p.y = 0.01 * float(point_msg_str[7][:-1])
                 p.z = float(point_msg_str[10][:-1])
-                
+                print (p)
                 #rospy.loginfo("Got ball location, current index is: {0}".format(i))
 
                 if p.z == 1:

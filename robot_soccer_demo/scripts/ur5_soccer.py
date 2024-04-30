@@ -4,13 +4,14 @@ import rospy
 import copy
 import sys
 
+
 from geometry_msgs.msg import Point, Pose
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
 from lib.kafka_producer import KafkaProducer
 from lib.ur5_move_group import UR5Movegroup
 
-KAFKA_BOOTSTRAP_SERVER = '192.168.137.1:9093,192.168.137.1:9094,192.168.137.1:9095'
+KAFKA_BOOTSTRAP_SERVER = '192.168.126.219:9096,192.168.126.219:9097,192.168.126.219.19:9098'
 KAFKA_API_KEY = 'theengineroom'
 KAFKA_API_SECRET = "1tY=ZP43t20"
 

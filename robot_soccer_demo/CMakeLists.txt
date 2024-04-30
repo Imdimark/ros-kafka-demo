@@ -18,10 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
   trajectory_msgs
 )
 
-## Generate messages in the 'msg' folder
-add_message_files(
-   DIRECTORY msg
-)
+
 
 generate_messages(
    DEPENDENCIES
@@ -50,6 +47,8 @@ catkin_package()
 
 catkin_install_python(PROGRAMS
   scripts/kafka_consumer_node.py
+  scripts/panda_soccer.py
+  scripts/ur5_soccer.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

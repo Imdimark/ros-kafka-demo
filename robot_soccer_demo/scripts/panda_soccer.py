@@ -10,7 +10,7 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from lib.kafka_producer import KafkaProducer
 from lib.panda_move_group import PandaMoveGroup
 
-KAFKA_BOOTSTRAP_SERVER = '192.168.137.1:9093,192.168.137.1:9094,192.168.137.1:9095'
+KAFKA_BOOTSTRAP_SERVER = '192.168.126.219:9096,192.168.126.219:9097,192.168.126.219.19:9098'
 KAFKA_API_KEY = 'theengineroom'
 KAFKA_API_SECRET = "1tY=ZP43t20"
 
@@ -84,7 +84,7 @@ class PandaSoccer:
 
       # Build and publish Kafka record from ROS message 
       self.kp.produce_record(self.topic, joint_trajectory_msg)
-
+      
 
     def soccer_routine(self):
       
@@ -93,13 +93,19 @@ class PandaSoccer:
       reach_pose.position.x = self.ball_location.x
       reach_pose.position.y = self.ball_location.y
       reach_pose.position.z = 0.125
-
+      
+      print ("entro in soccer routine" )
+      print (reach_pose.position)
+      print (self.idle_joint_state, self.idle_pose)
       plan, fraction = self.panda_arm.plan_cartesian_path(self.idle_joint_state, reach_pose)
+      print ("prima if")
       # Make sure plan is valid..
       if len(plan.joint_trajectory.points) > 2 and fraction > 0.99:
         self.kp.produce_record(self.topic, plan.joint_trajectory)
+        print ("if")
 
       else:
+        print ("else")
         return
       
       # Save last joint state as new initial state for next stage...
@@ -129,7 +135,10 @@ def main():
     
     # Repeat indefinitely
     while not rospy.is_shutdown():
-      
+      if ppr.ball_location_received:
+        print ("1")
+      if ppr.ball_location is not None:
+        print ("2")
       if ppr.ball_location_received and ppr.ball_location is not None:
          
         ppr.soccer_routine()
